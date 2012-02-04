@@ -7,3 +7,4 @@ Twisted==11.0.0
 Werkzeug==0.8.2
 zope.interface==3.5.1
 gunicorn==0.13.4
+web.py==0.36
