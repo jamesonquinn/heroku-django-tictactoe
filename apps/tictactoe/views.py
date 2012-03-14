@@ -259,5 +259,7 @@ def make_tables():
     auth.User.create_table(fail_silently=True)
     for table in (Game, GameMove, GameInvite):
         table.create_table(fail_silently=True)
+    
+    #if I ever come back here, would have to create admin user here...
         
     return "created!"
