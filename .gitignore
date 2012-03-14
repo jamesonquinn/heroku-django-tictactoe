@@ -1,0 +1,66 @@
+*~
+*.tmp
+*.py[co]
+*.egg-info
+*.bak.py
+*.bak.html
+*.log
+*.orig
+*.local.py
+
+# Development and logging
+emails/*.*
+logs/*.*
+
+# JS
+apps/*/static/js/*.js
+static/js/*.js
+static/js/web/*.js
+static/js/mobile/*.js
+!static/js/lib/*.js
+tests/js/tests.js
+tests/js/clienttests.js
+
+# CSS
+static/css/*.css
+
+# Images
+static/images/buttons-*.png
+static/images/icons-*.png
+
+# Local settings
+host_settings/*.py
+!host_settings/_*.py
+
+# SQLite
+*.db
+*.sqlite3
+
+# Apple - OS X
+.DS_Store
+*._*
+
+# Emacs
+.#*
+
+# Vim
+*.sw[po]
+
+# PyCharm
+.idea
+
+# Sublime Text
+*.sublime-project
+
+# Cache and user images/data (uploaded)
+.sass-cache/
+media/CACHE/
+media/public/
+media/private/
+
+# Celery
+celery
+celerybeat.pid
+celerybeat-schedule
+
+stuff/
