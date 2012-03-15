@@ -10,6 +10,7 @@ class WSGISocketIOHandler(SocketIOHandler):
         env = super(WSGISocketIOHandler, self).get_environ()
         env['gunicorn.sock'] = self.socket
         env['RAW_URI'] = self.path
+        print "XXXXXXEnvironment:", env
         env['SERVER_PORT'] = 5000
         return env
 
