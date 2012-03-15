@@ -189,7 +189,7 @@ if 'EMAIL_BACKEND' in os.environ:
 if os.environ.has_key('MAILGUN_SMTP_PORT'):
     EMAIL_HOST = os.environ['MAILGUN_SMTP_SERVER']
     EMAIL_DOMAIN = 'bettercount.us'
-    EMAIL_PORT = os.environ['MAILGUN_SMTP_PORT']
+    EMAIL_PORT = int(os.environ['MAILGUN_SMTP_PORT'])
     EMAIL_HOST_USER = os.environ['MAILGUN_SMTP_LOGIN']
     EMAIL_HOST_PASSWORD = os.environ['MAILGUN_SMTP_PASSWORD']
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
