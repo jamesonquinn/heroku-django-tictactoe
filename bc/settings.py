@@ -16,7 +16,7 @@ ACCOUNT_ACTIVATION_DAYS = 5
 MANAGERS = ADMINS
 
 if 'DATABASE_URL' not in os.environ:
-    print "No database in environ."
+    print "No database in environ.", os.environ
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
