@@ -7,11 +7,6 @@ PROJECT_ROOT = os.path.dirname(__file__)
 LOGIN_URL = '/users/login/'
 
 DEBUG = True
-if 'DEBUG' in os.environ:
-    DEBUG = not not os.environ['DEBUG']
-TEMPLATE_DEBUG = DEBUG
-if 'EMAIL_BACKEND' in os.environ:
-    EMAIL_BACKEND = os.environ['EMAIL_BACKEND']
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -185,3 +180,17 @@ else:
     def get_redis():
         from redis import Redis
         return Redis(getattr(object(), 'REDIS_HOST', 'localhost'))
+    
+if 'DEBUG' in os.environ:
+    DEBUG = not not os.environ['DEBUG']
+TEMPLATE_DEBUG = DEBUG
+if 'EMAIL_BACKEND' in os.environ:
+    EMAIL_BACKEND = os.environ['EMAIL_BACKEND']
+if os.environ.has_key('MAILGUN_SMTP_PORT'):
+    EMAIL_HOST = os.environ['MAILGUN_SMTP_SERVER']
+    EMAIL_DOMAIN = 'bettercount.us'
+    EMAIL_PORT = os.environ['MAILGUN_SMTP_PORT']
+    EMAIL_HOST_USER = os.environ['MAILGUN_SMTP_LOGIN']
+    EMAIL_HOST_PASSWORD = os.environ['MAILGUN_SMTP_PASSWORD']
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    #EMAIL_USE_TLS
