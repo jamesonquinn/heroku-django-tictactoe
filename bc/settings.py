@@ -1,12 +1,17 @@
 # Django settings for TicTacToe project.
 import os
 import environment
+import urlparse
 PROJECT_ROOT = os.path.dirname(__file__)
 
 LOGIN_URL = '/users/login/'
 
 DEBUG = True
+if 'DEBUG' in os.environ:
+    DEBUG = not not os.environ['DEBUG']
 TEMPLATE_DEBUG = DEBUG
+if 'EMAIL_BACKEND' in os.environ:
+    EMAIL_BACKEND = os.environ['EMAIL_BACKEND']
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -168,3 +173,15 @@ try:
         from local_settings import *
 except:
         pass
+    
+
+if os.environ.has_key('REDIS_TO_GO'):
+    urlparse.uses_netloc.append('redis')
+    redurl = urlparse.urlparse(os.environ['REDIS_TO_GO'])
+    def get_redis():
+        from redis import Redis
+        return Redis(host=redurl.hostname, port=redurl.port, db=0, password=redurl.password)
+else:
+    def get_redis():
+        from redis import Redis
+        return Redis(getattr(object(), 'REDIS_HOST', 'localhost'))

@@ -17,14 +17,13 @@ from core.models import Game, GameMove, GameInvite
 from tttlib import Player_X, Player_O
 from core.forms import EmailForm
 
-from redis import Redis
-from django.conf import settings
+import settings
 from gevent.greenlet import Greenlet
 
-REDIS_HOST = getattr(settings, 'REDIS_HOST', 'localhost')
+#REDIS_HOST = getattr(settings, 'REDIS_HOST', 'localhost')
 
 def _sub_listener(socketio, chan):
-        red = Redis(REDIS_HOST)
+        red = settings.get_redis()
         red.subscribe(chan)
         print 'subscribed on chan ', chan
         while True:
@@ -51,7 +50,7 @@ def create_move(request, game_id):
     game = _get_game(request.user, game_id)
     if request.POST:
         move = int(request.POST['move'])
-        red = Redis(REDIS_HOST)
+        red = settings.get_redis()#Redis(REDIS_HOST)
 
         # get player of move
         tic_player = Player_X if game.player1 == request.user else Player_O
@@ -174,7 +173,7 @@ def accept_invite(request, key):
 
         game.save()
 
-        red = Redis(REDIS_HOST)
+        red = settings.get_redis()#Redis(REDIS_HOST)
         red.publish('%d' % invite.inviter.id, ['game_started', game.id, str(request.user.username)])
 
         # No reason to keep the invites around
@@ -216,7 +215,7 @@ def game_list(request, template_name='core/game_list.html'):
                 messages.add_message(request, messages.SUCCESS, 'Invite was sent!')
 
                 if invite.invitee:
-                    red = Redis(REDIS_HOST)
+                    red = settings.get_redis()#Redis(REDIS_HOST)
                     red.publish('%d' % invite.invitee.id, ['new_invite', str(request.user.username), url])
 
                 send_mail('You are invited to play tic tac toe :)', 'Click here! %s%s' % (current_site.domain, url), 'sontek@gmail.com',
