@@ -1,5 +1,6 @@
 # Django settings for TicTacToe project.
 import os
+import environment
 PROJECT_ROOT = os.path.dirname(__file__)
 
 LOGIN_URL = '/users/login/'

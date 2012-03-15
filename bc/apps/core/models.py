@@ -3,7 +3,7 @@ from django.db.models import Q
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext as _
-from lib import Player_X, Player_O, Board
+from tttlib import Player_X, Player_O, Board
 import hashlib
 import random
 

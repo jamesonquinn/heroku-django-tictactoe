@@ -14,7 +14,7 @@ import simplejson
 import random
 
 from core.models import Game, GameMove, GameInvite
-from lib import Player_X, Player_O
+from tttlib import Player_X, Player_O
 from core.forms import EmailForm
 
 from redis import Redis
