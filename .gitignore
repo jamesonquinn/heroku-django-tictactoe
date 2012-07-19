@@ -29,8 +29,7 @@ static/images/buttons-*.png
 static/images/icons-*.png
 
 # Local settings
-host_settings/*.py
-!host_settings/_*.py
+bc/settings/local.py
 
 # SQLite
 *.db
